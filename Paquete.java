@@ -23,9 +23,9 @@ public class Paquete{
         return this.peso;
     }
     public boolean getTieneAlimentos(){
-        return this.tieneAimentos;
+        return this.tieneAlimentos;
     }
     public int valorUrgencia(){
-        retun this.valorUrgencia;
+        return this.valorUrgencia;
     }
 }
