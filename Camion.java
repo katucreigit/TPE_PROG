@@ -1,18 +1,18 @@
 public class Camion {
-    private int id;
+    private int idC;
     private String patente;
     private boolean refrigerado;
     private double capacidadKg;
 
-    public Camion(int id, String patente, boolean refrigerado, double capacidadKg) {
-        this.id = id;
+    public Camion(int idC, String patente, boolean refrigerado, double capacidadKg) {
+        this.idC = idC;
         this.patente = patente;
         this.refrigerado = refrigerado;
         this.capacidadKg = capacidadKg;
     }
 
     public int getId() {
-        return id;
+        return idC;
     }
 
     public String getPatente() {

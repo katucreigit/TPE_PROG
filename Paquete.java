@@ -1,12 +1,12 @@
 public class Paquete{
-    private int id;
+    private int idP;
     private String codigoId;
     private double peso;
     private boolean tieneAlimentos;
     private int valorUrgencia;
 
-    public Paquete(int id, String codigoId, double peso, boolean tieneAlimentos, int valorUrgencia){
-        this.id= id;
+    public Paquete(int idP, String codigoId, double peso, boolean tieneAlimentos, int valorUrgencia){
+        this.id= idP;
         this.codigoId= codigoId;
         this.peso= peso;
         this.tieneAlimentos= tieneAlimentos;
@@ -14,7 +14,7 @@ public class Paquete{
     }
 
     public int getId(){
-        return this.id;
+        return this.idP;
     }
     public String getCodigoId(){
         return this.codigoId;
