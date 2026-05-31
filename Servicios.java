@@ -6,17 +6,16 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Servicios {
-    //Completar con las estructuras y métodos privados que se requieran.
-    /*
-    * Expresar la complejidad temporal del constructor.
-    */
     private List<Paquete> paquetes;
     private List<Camion> camiones;
     private HashMap<Boolean, List<Paquete>> paquetesPorAlimentos;
-
+    private HashMap<String, Paquete> paquetesPorCodigo;
+    
+    //Expresar la complejidad temporal del constructor
     public Servicios(String pathCamiones, String pathPaquetes){
         paquetes = new ArrayList<>();
         camiones = new ArrayList<>();
+        paquetesPorCodigo = new HashMap<>();
         paquetesPorAlimentos = new HashMap<>();
 
         paquetesPorAlimentos.put(true, new ArrayList<>());
@@ -51,6 +50,7 @@ public class Servicios {
 
                 // guarda objeto
                 paquetes.add(p);
+                paquetesPorCodigo.put(codigoId, p);
                 paquetesPorAlimentos.get(tieneAlimentos).add(p);
             }
 
@@ -94,33 +94,28 @@ public class Servicios {
             System.out.println("No se encontró el archivo de camión");
         }
     }
-    /*
-    * Expresar la complejidad temporal del servicio 1.
-    */
+    
+    //Expresar la complejidad temporal del servicio 1.
     public Paquete servicio1(String codigoPaquete) {
-
+        return paquetesPorCodigo.get(codigoPaquete);
     }
-    /*
-    * Expresar la complejidad temporal del servicio 2.
-    */
+    
+    //Expresar la complejidad temporal del servicio 2.
     public List<Paquete> servicio2(boolean contieneAlimentos) {
         return paquetesPorAlimentos.get(contieneAlimentos);
     }
-    /*
-    * Expresar la complejidad temporal del servicio 3.
-    */
+    
+    //Expresar la complejidad temporal del servicio 3.
     public List<Paquete> servicio3(int urgenciaMinima, int urgenciaMaxima) {
         List<Paquete> resultado = new ArrayList<>();
 
         for (Paquete p : paquetes) {
+            if (p.valorUrgencia() >= urgenciaMinima &&
+                p.valorUrgencia() <= urgenciaMaxima) {
 
-        if (p.valorUrgencia() >= urgenciaMinima &&
-            p.valorUrgencia() <= urgenciaMaxima) {
-
-            resultado.add(p);
-        }
+                resultado.add(p);
+            }
     }
-
-    return resultado;
+        return resultado;
     }
 }
