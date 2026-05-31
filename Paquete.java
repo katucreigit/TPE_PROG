@@ -6,7 +6,7 @@ public class Paquete{
     private int valorUrgencia;
 
     public Paquete(int idP, String codigoId, double peso, boolean tieneAlimentos, int valorUrgencia){
-        this.id= idP;
+        this.idP= idP;
         this.codigoId= codigoId;
         this.peso= peso;
         this.tieneAlimentos= tieneAlimentos;

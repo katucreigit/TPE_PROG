@@ -1,6 +1,7 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
 
@@ -11,10 +12,15 @@ public class Servicios {
     */
     private List<Paquete> paquetes;
     private List<Camion> camiones;
+    private HashMap<Boolean, List<Paquete>> paquetesPorAlimentos;
 
     public Servicios(String pathCamiones, String pathPaquetes){
         paquetes = new ArrayList<>();
         camiones = new ArrayList<>();
+        paquetesPorAlimentos = new HashMap<>();
+
+        paquetesPorAlimentos.put(true, new ArrayList<>());
+        paquetesPorAlimentos.put(false, new ArrayList<>());
 
         cargarPaquetes(pathPaquetes);
         cargarCamiones(pathCamiones);
@@ -45,6 +51,7 @@ public class Servicios {
 
                 // guarda objeto
                 paquetes.add(p);
+                paquetesPorAlimentos.get(tieneAlimentos).add(p);
             }
 
             scanner.close();
@@ -90,19 +97,30 @@ public class Servicios {
     /*
     * Expresar la complejidad temporal del servicio 1.
     */
-    public Paquete servicio1(String codigoPaquete) { 
+    public Paquete servicio1(String codigoPaquete) {
 
     }
     /*
     * Expresar la complejidad temporal del servicio 2.
     */
-    public List<Paquete> servicio2(boolean contieneAlimentos) { 
-
+    public List<Paquete> servicio2(boolean contieneAlimentos) {
+        return paquetesPorAlimentos.get(contieneAlimentos);
     }
     /*
     * Expresar la complejidad temporal del servicio 3.
     */
     public List<Paquete> servicio3(int urgenciaMinima, int urgenciaMaxima) {
+        List<Paquete> resultado = new ArrayList<>();
 
+        for (Paquete p : paquetes) {
+
+        if (p.valorUrgencia() >= urgenciaMinima &&
+            p.valorUrgencia() <= urgenciaMaxima) {
+
+            resultado.add(p);
+        }
+    }
+
+    return resultado;
     }
 }
