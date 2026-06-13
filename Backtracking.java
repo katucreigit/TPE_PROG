@@ -1,12 +1,12 @@
-import java.util.*;
+import java.util.ArrayList;
 
 public class Backtracking {
 
-    private int mejorPesoNoAsignado = Integer.MAX_VALUE;
+    private double mejorPesoNoAsignado = Integer.MAX_VALUE;
 
-    private int estadosGenerados = 0;
+    private double estadosGenerados = 0;
 
-    public void resolver(ArrayList<Camion> camiones, ArrayList<Paquete> paquetes) {
+    public void asignarPaquetesBackTracking(ArrayList<Camion> camiones, ArrayList<Paquete> paquetes) {
 
         backtracking(0, paquetes, camiones, 0);
 
@@ -15,33 +15,31 @@ public class Backtracking {
         System.out.println("Estados generados: " + estadosGenerados);
     }
 
-    private void backtracking(int index, ArrayList<Paquete> paquetes, ArrayList<Camion> camiones, int pesoNoAsignadoActual) {
+    private void backtracking(int i, ArrayList<Paquete> paquetes, ArrayList<Camion> camiones, double pesoNoAsignadoActual) {
 
         estadosGenerados++;
 
-        if (index == paquetes.size()) {
-
-            if (pesoNoAsignadoActual < mejorPesoNoAsignado) {
-                mejorPesoNoAsignado = pesoNoAsignadoActual;
-            }
-
+        if (pesoNoAsignadoActual >= mejorPesoNoAsignado) {
             return;
         }
 
-        Paquete p = paquetes.get(index);
+        if (i == paquetes.size()) {
+            if (pesoNoAsignadoActual < mejorPesoNoAsignado) {
+                mejorPesoNoAsignado = pesoNoAsignadoActual;
+            }
+            return;
+        }
+
+        Paquete p = paquetes.get(i);
 
         for (Camion c : camiones) {
-
             if (c.puedeCargar(p)) {
-
                 c.agregarPaquete(p);
-
-                backtracking(index + 1,paquetes, camiones,pesoNoAsignadoActual);
-
-                c.quitarPaquete(p);
+                backtracking(i + 1,paquetes, camiones,pesoNoAsignadoActual);
+                c.eliminarPaquete(p);
             }
         }
 
-        backtracking(index + 1, paquetes, camiones, pesoNoAsignadoActual + p.getPeso());
+        backtracking(i + 1, paquetes, camiones, pesoNoAsignadoActual + p.getPeso());
     }
 }
