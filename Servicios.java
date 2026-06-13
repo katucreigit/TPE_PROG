@@ -28,9 +28,8 @@ public class Servicios {
     private void cargarPaquetes(String pathPaquetes){
         try {
             Scanner scanner = new Scanner(new File(pathPaquetes));
-            // saltea la primera línea (cantidad total)
             int totalPaquetes = Integer.parseInt(scanner.nextLine());
-            // mientras haya líneas
+
             while(scanner.hasNextLine()) {
 
                 // lee una línea completa
@@ -57,7 +56,6 @@ public class Servicios {
             scanner.close();
 
         } catch (FileNotFoundException e) {
-
             System.out.println("No se encontró el archivo de paquete");
         }
     }
@@ -110,12 +108,10 @@ public class Servicios {
         List<Paquete> resultado = new ArrayList<>();
 
         for (Paquete p : paquetes) {
-            if (p.valorUrgencia() >= urgenciaMinima &&
-                p.valorUrgencia() <= urgenciaMaxima) {
-
+            if (p.valorUrgencia() >= urgenciaMinima && p.valorUrgencia() <= urgenciaMaxima) {
                 resultado.add(p);
             }
-    }
+        }
         return resultado;
     }
 }
