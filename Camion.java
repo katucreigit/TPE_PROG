@@ -8,7 +8,7 @@ public class Camion {
     private double cargaActual;
     private ArrayList<Paquete> paquetes;
 
-    public Camion(int idC, String patente, boolean refrigerado, double capacidadKg, double cargaActual) {
+    public Camion(int idC, String patente, boolean refrigerado, double capacidadKg) {
         this.idC = idC;
         this.patente = patente;
         this.refrigerado = refrigerado;
@@ -49,5 +49,13 @@ public class Camion {
 
     public double getCapacidadKg() {
         return capacidadKg;
+    }
+
+    public ArrayList<Paquete> getPaquetes() {
+        return paquetes;
+    }
+    
+    public double getCargaActual() {
+        return cargaActual;
     }
 }
