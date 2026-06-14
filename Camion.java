@@ -31,7 +31,7 @@ public class Camion {
     }
 
     public void eliminarPaquete(Paquete p) {
-        paquetes.remove(paquetes.size() - 1);
+        paquetes.remove(p);
         cargaActual -= p.getPeso();
     }
 

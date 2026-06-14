@@ -3,18 +3,13 @@ import java.util.ArrayList;
 public class Backtracking {
 
     private double mejorPesoNoAsignado = Double.MAX_VALUE;
-
     private double estadosGenerados = 0;
-
     private ArrayList<Camion> mejorSolucion;
 
     public void asignarPaquetesBackTracking(ArrayList<Camion> camiones, ArrayList<Paquete> paquetes) {
 
         backtracking(0, paquetes, camiones, 0);
 
-        System.out.println("Mejor peso no asignado: " + mejorPesoNoAsignado);
-
-        System.out.println("Estados generados: " + estadosGenerados);
     }
 
     private void backtracking(int i, ArrayList<Paquete> paquetes, ArrayList<Camion> camiones, double pesoNoAsignadoActual) {
@@ -46,9 +41,7 @@ public class Backtracking {
         backtracking(i + 1, paquetes, camiones, pesoNoAsignadoActual + p.getPeso());
     }
 
-
     private void guardarSolucion(ArrayList<Camion> camiones) {
-
         mejorSolucion = new ArrayList<>();
     
         for (Camion c : camiones) {
@@ -58,8 +51,21 @@ public class Backtracking {
             for (Paquete p : c.getPaquetes()) {
                 copia.agregarPaquete(p);
             }
-    
             mejorSolucion.add(copia);
         }
+    }
+    public void mostrarSolucion() {
+        System.out.println("Backtracking");
+        System.out.println("Solución obtenida:");
+        for (Camion c : mejorSolucion) {
+            System.out.println("Camión ID: " + c.getId() + ", Patente: " + c.getPatente());
+            System.out.print("Paquetes: ");
+            for (Paquete p : c.getPaquetes()) {
+                System.out.print("[" + p.getId() + ", " + p.getPeso() + " kg] ");
+            }
+            System.out.println();
+        }
+        System.out.println("Peso no asignado: " + mejorPesoNoAsignado + " kg");
+        System.out.println("Cantidad de estados generados: " + estadosGenerados);
     }
 }
