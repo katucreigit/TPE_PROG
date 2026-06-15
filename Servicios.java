@@ -28,7 +28,7 @@ public class Servicios {
     private void cargarPaquetes(String pathPaquetes){
         try {
             Scanner scanner = new Scanner(new File(pathPaquetes));
-            int totalPaquetes = Integer.parseInt(scanner.nextLine());
+            scanner.nextLine();
 
             while(scanner.hasNextLine()) {
 
@@ -63,7 +63,7 @@ public class Servicios {
         try {
             Scanner scanner = new Scanner(new File(pathCamiones));
             // saltea la primera línea (cantidad total)
-            int totalCamiones = Integer.parseInt(scanner.nextLine());
+            scanner.nextLine();
             // mientras haya líneas
             while(scanner.hasNextLine()) {
 
