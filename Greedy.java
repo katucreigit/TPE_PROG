@@ -1,12 +1,15 @@
 import java.util.ArrayList;
+import java.util.List;
 
 public class Greedy{
-    private double pesoNoAsignado = 0;
-    private int candidatosConsiderados= 0;
+    private double pesoNoAsignado;
+    private int candidatosConsiderados;
 
-    public void asignarPaquetesGreedy(ArrayList<Camion> camiones, ArrayList<Paquete> paquetes) {
-    
-        ArrayList<Paquete> candidatos = new ArrayList<>(paquetes);
+    public void asignarPaquetesGreedy(List<Camion> camiones, List<Paquete> paquetes) {
+        // SOLUCIÓN: Reiniciamos acá para asegurar que cada ejecución arranque de cero
+        this.pesoNoAsignado = 0;
+        this.candidatosConsiderados = 0;
+        List<Paquete> candidatos = new ArrayList<>(paquetes);
 
         while (!candidatos.isEmpty()) {
             
@@ -32,7 +35,7 @@ public class Greedy{
         }
     }
 
-    private Paquete seleccionar(ArrayList<Paquete> candidatos) {
+    private Paquete seleccionar(List<Paquete> candidatos) {
 
         if (candidatos.isEmpty()) {
             return null;
@@ -50,7 +53,7 @@ public class Greedy{
     }
 
 
-    public void mostrarSolucion(ArrayList<Camion> camiones) {
+    public void mostrarSolucion(List<Camion> camiones) {
 
         System.out.println("Greedy");
         System.out.println("Solución obtenida:");

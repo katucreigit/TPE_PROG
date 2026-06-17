@@ -52,7 +52,7 @@ public class Camion {
     }
 
     public ArrayList<Paquete> getPaquetes() {
-        return paquetes;
+        return new ArrayList<>(paquetes);
     }
     
     public double getCargaActual() {

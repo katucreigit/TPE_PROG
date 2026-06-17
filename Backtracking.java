@@ -1,18 +1,23 @@
 import java.util.ArrayList;
+import java.util.List;
 
 public class Backtracking {
 
-    private double mejorPesoNoAsignado = Double.MAX_VALUE;
-    private double estadosGenerados = 0;
-    private ArrayList<Camion> mejorSolucion;
+    private double mejorPesoNoAsignado;
+    private double estadosGenerados;
+    private List<Camion> mejorSolucion;
 
-    public void asignarPaquetesBackTracking(ArrayList<Camion> camiones, ArrayList<Paquete> paquetes) {
+    public void asignarPaquetesBackTracking(List<Camion> camiones, List<Paquete> paquetes) {
+        // Reiniciamos los estados de las variables globales antes de empezar la recursión
+        this.mejorPesoNoAsignado = Double.MAX_VALUE;
+        this.estadosGenerados = 0;
+        this.mejorSolucion = new ArrayList<>();
 
-        backtracking(0, paquetes, camiones, 0);
-
+        // Lanzamos el algoritmo recursivo
+        backtracking(0, (List<Paquete>) paquetes, (List<Camion>) camiones, 0);
     }
 
-    private void backtracking(int i, ArrayList<Paquete> paquetes, ArrayList<Camion> camiones, double pesoNoAsignadoActual) {
+    private void backtracking(int i, List<Paquete> paquetes, List<Camion> camiones, double pesoNoAsignadoActual) {
 
         estadosGenerados++;
 
@@ -41,7 +46,7 @@ public class Backtracking {
         backtracking(i + 1, paquetes, camiones, pesoNoAsignadoActual + p.getPeso());
     }
 
-    private void guardarSolucion(ArrayList<Camion> camiones) {
+    private void guardarSolucion(List<Camion> camiones) {
         mejorSolucion = new ArrayList<>();
     
         for (Camion c : camiones) {

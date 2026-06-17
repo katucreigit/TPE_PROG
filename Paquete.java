@@ -25,7 +25,7 @@ public class Paquete{
     public boolean getTieneAlimentos(){
         return this.tieneAlimentos;
     }
-    public int valorUrgencia(){
+    public int getValorUrgencia(){
         return this.valorUrgencia;
     }
 }

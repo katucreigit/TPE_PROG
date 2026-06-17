@@ -92,6 +92,14 @@ public class Servicios {
             System.out.println("No se encontró el archivo de camión");
         }
     }
+
+    public ArrayList<Camion> copiaCamiones(){
+        return new ArrayList<>(camiones);
+    }
+
+    public ArrayList<Paquete> copiaPaquetes(){
+        return new ArrayList<>(paquetes);
+    }
     
     //Expresar la complejidad temporal del servicio 1.
     public Paquete servicio1(String codigoPaquete) {
@@ -108,7 +116,7 @@ public class Servicios {
         List<Paquete> resultado = new ArrayList<>();
 
         for (Paquete p : paquetes) {
-            if (p.valorUrgencia() >= urgenciaMinima && p.valorUrgencia() <= urgenciaMaxima) {
+            if (p.getValorUrgencia() >= urgenciaMinima && p.getValorUrgencia() <= urgenciaMaxima) {
                 resultado.add(p);
             }
         }
