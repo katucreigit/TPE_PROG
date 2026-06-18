@@ -18,7 +18,6 @@ public class Camion {
     }
 
     public boolean puedeCargar(Paquete p){
-
         if (p.getTieneAlimentos() && !isRefrigerado()) {
             return false;
         }

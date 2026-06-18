@@ -2,12 +2,11 @@ import java.util.ArrayList;
 
 public class Main {
         public static void main(String[] args) {
-    
-            Servicios servicios = new Servicios("/Camiones.csv","Camiones.csv");
+            
+            Servicios servicios = new Servicios("./Camiones.csv","./Paquetes.csv");
 
             System.out.println("SERVICIO 1");
-
-            Paquete p = servicios.servicio1("PKG001");
+            Paquete p = servicios.servicio1("P002");
     
             if (p != null) {
                 System.out.println("Paquete encontrado:");
@@ -15,39 +14,24 @@ public class Main {
             }
 
             System.out.println("SERVICIO 2");
-
             for (Paquete paq : servicios.servicio2(true)) {
                 System.out.println(paq.getCodigoId() +" - alimentos: " +paq.getTieneAlimentos());
             }
 
             System.out.println("SERVICIO 3");
 
-            for (Paquete paq : servicios.servicio3(5, 10)) {
+            for (Paquete paq : servicios.servicio3(12, 100)) {
                 System.out.println(paq.getCodigoId() +" - urgencia: " +paq.getValorUrgencia());
             }
 
-            System.out.println("BACKTRACKING");
-
             Backtracking bt = new Backtracking();
-
-            bt.asignarPaquetesBackTracking(
-                    new ArrayList<>(servicios.copiaCamiones()),
-                    new ArrayList<>(servicios.copiaPaquetes())
-            );
-
+            bt.asignarPaquetesBackTracking(new ArrayList<>(servicios.copiaCamiones()),new ArrayList<>(servicios.copiaPaquetes()));
             bt.mostrarSolucion();
 
-            System.out.println("GREEDY");
-
             Greedy greedy = new Greedy();
+            ArrayList<Camion> camionesGreedy = servicios.copiaCamiones();
     
-            ArrayList<Camion> camionesGreedy =
-                    new ArrayList<>(servicios.copiaCamiones());
-    
-            greedy.asignarPaquetesGreedy(
-                    camionesGreedy,
-                    new ArrayList<>(servicios.copiaPaquetes())
-            );
+            greedy.asignarPaquetesGreedy(camionesGreedy,servicios.copiaPaquetes());
     
             greedy.mostrarSolucion(camionesGreedy);
         }

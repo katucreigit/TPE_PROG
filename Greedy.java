@@ -5,15 +5,23 @@ public class Greedy{
     private double pesoNoAsignado;
     private int candidatosConsiderados;
 
+    /*
+    Estrategia: consiste en seleccionar en cada paso el paquete de mayor peso entre los 
+    que aún no fueron procesados. DEspues se intenta asignarlo al primer camión que cumpla 
+    las restricciones de capacidad y refrigeración. Una vez que se toma una decisión, no se 
+    modifica posteriormente. La idea de este criterio es priorizar la asignación de los 
+    paquetes más pesados, ya que son los más difíciles de ubicar y los que más impactan en el 
+    peso total no asignado en caso de quedar fuera de la solución.
+    */
+
     public void asignarPaquetesGreedy(List<Camion> camiones, List<Paquete> paquetes) {
-        // SOLUCIÓN: Reiniciamos acá para asegurar que cada ejecución arranque de cero
         this.pesoNoAsignado = 0;
         this.candidatosConsiderados = 0;
         List<Paquete> candidatos = new ArrayList<>(paquetes);
 
         while (!candidatos.isEmpty()) {
             
-            Paquete p = seleccionar(candidatos);
+            Paquete p = seleccionarPaqueteMasPesado(candidatos);
             candidatos.remove(p);
 
             boolean asignado = false;
@@ -26,7 +34,6 @@ public class Greedy{
                     asignado = true;
                     break;
                 }
-            
                 
             }
             if (!asignado) {
@@ -35,21 +42,23 @@ public class Greedy{
         }
     }
 
-    private Paquete seleccionar(List<Paquete> candidatos) {
+    private Paquete seleccionarPaqueteMasPesado(List<Paquete> candidatos) {
 
         if (candidatos.isEmpty()) {
             return null;
         }
 
-        Paquete mejorPaquete = candidatos.get(0);
+        Paquete mayorPaquete = null;
+        double mayorPeso= 0;
 
         for (Paquete p : candidatos) {
-            if (p.getPeso() > mejorPaquete.getPeso()) {
-                mejorPaquete = p;
+            if (p.getPeso() > mayorPeso) {
+                mayorPaquete = p;
+                mayorPeso= p.getPeso();
             }
         }
 
-        return mejorPaquete;
+        return mayorPaquete;
     }
 
 
