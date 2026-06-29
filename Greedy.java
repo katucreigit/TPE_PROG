@@ -6,12 +6,13 @@ public class Greedy{
     private int candidatosConsiderados;
 
     /*
-    Estrategia: consiste en seleccionar en cada paso el paquete de mayor peso entre los 
-    que aún no fueron procesados. DEspues se intenta asignarlo al primer camión que cumpla 
-    las restricciones de capacidad y refrigeración. Una vez que se toma una decisión, no se 
-    modifica posteriormente. La idea de este criterio es priorizar la asignación de los 
-    paquetes más pesados, ya que son los más difíciles de ubicar y los que más impactan en el 
-    peso total no asignado en caso de quedar fuera de la solución.
+    Estrategia: consiste en ordenar inicialmente el conjunto de paquetes de mayor a menor peso
+    como criterio. DEspues se recorre secuencialmente la lista ya ordenada, seleccionando 
+    en cada paso el paquete más pesado disponible y buscando asignarlo al primer camión que 
+    cumpla con las restricciones de capacidad de carga y refrigeración. Una vez que se toma una
+    decisión, no se modifica posteriormente. La idea de este criterio es priorizar la asignación 
+    de los paquetes más pesados al principio del algoritmo, ya que son los más difíciles de ubicar
+    y los que más impactan en el peso total no asignado en caso de quedar fuera de la solución.
     */
 
     public void asignarPaquetesGreedy(List<Camion> camiones, List<Paquete> paquetes) {
@@ -19,10 +20,9 @@ public class Greedy{
         this.candidatosConsiderados = 0;
         List<Paquete> candidatos = new ArrayList<>(paquetes);
 
-        while (!candidatos.isEmpty()) {
-            
-            Paquete p = seleccionarPaqueteMasPesado(candidatos);
-            candidatos.remove(p);
+        candidatos.sort((p1, p2) -> Double.compare(p2.getPeso(), p1.getPeso()));
+
+        for(Paquete p : candidatos) {
 
             boolean asignado = false;
 
@@ -41,26 +41,6 @@ public class Greedy{
             }
         }
     }
-
-    private Paquete seleccionarPaqueteMasPesado(List<Paquete> candidatos) {
-
-        if (candidatos.isEmpty()) {
-            return null;
-        }
-
-        Paquete mayorPaquete = null;
-        double mayorPeso= 0;
-
-        for (Paquete p : candidatos) {
-            if (p.getPeso() > mayorPeso) {
-                mayorPaquete = p;
-                mayorPeso= p.getPeso();
-            }
-        }
-
-        return mayorPaquete;
-    }
-
 
     public void mostrarSolucion(List<Camion> camiones) {
 

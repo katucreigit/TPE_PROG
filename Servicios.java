@@ -92,12 +92,12 @@ public class Servicios {
         return new ArrayList<>(paquetes);
     }
     
-    // La complejidad temporal del SERVICIO 1 es O(1) promedio
+    // La complejidad temporal del SERVICIO 1 es O(n) debido a las posibles colisiones
     public Paquete servicio1(String codigoPaquete) {
         return paquetesPorCodigo.get(codigoPaquete);
     }
     
-    //La complejidad temporal del SERVICIO 2 es O(1) promedio
+    //La complejidad temporal del SERVICIO 2 es O(n) debido a las posibles colisiones
     public List<Paquete> servicio2(boolean contieneAlimentos) {
         return paquetesPorAlimentos.get(contieneAlimentos);
     }

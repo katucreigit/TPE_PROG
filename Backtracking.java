@@ -12,8 +12,10 @@ public class Backtracking {
     Para cada paquete se consideran todas las alternativas válidas: asignarlo a cualquiera de los 
     camiones que cumplan las restricciones de capacidad y refrigeración,o dejarlo sin asignar.
     El algoritmo recorre recursivamente todas las combinaciones posibles y se queda aquella que minimiza 
-    el peso total de los paquetes no asignados. Además utilizamos una poda para evitar explorar ramas que 
-    ya poseen un peso no asignado igual o mayor al de la mejor solución encontrada hasta ese momento.
+    el peso total de los paquetes no asignados. Además, antes del llamado recursivo,aplicamos una poda: en 
+    el bucle de recorrer camiones si el peso no asignado actual ya es mayor o igual al menor, no se hace el 
+    llamado, y para el caso de dejar el paquete afuera, si sumar el peso al acumulado actual no mejora el 
+    menor peso hasta el momento, se descarta la rama, ya que no puede producir una solucion mejor.
     */
 
     public void asignarPaquetesBackTracking(List<Camion> camiones, List<Paquete> paquetes) {
@@ -28,10 +30,6 @@ public class Backtracking {
 
         estadosGenerados++;
 
-        if (pesoNoAsignadoActual >= menorPesoNoAsignado) {
-            return;
-        }
-
         if (i == paquetes.size()) {
             if (pesoNoAsignadoActual < menorPesoNoAsignado) {
                 menorPesoNoAsignado = pesoNoAsignadoActual;
@@ -45,12 +43,16 @@ public class Backtracking {
         for (Camion c : camiones) {
             if (c.puedeCargar(p)) {
                 c.agregarPaquete(p);
-                backtracking(i + 1,paquetes, camiones,pesoNoAsignadoActual);
+                if (pesoNoAsignadoActual < menorPesoNoAsignado) {
+                    backtracking(i + 1,paquetes, camiones,pesoNoAsignadoActual);
+                }
                 c.eliminarPaquete(p);
             }
         }
 
-        backtracking(i + 1, paquetes, camiones, pesoNoAsignadoActual + p.getPeso());
+        if (pesoNoAsignadoActual + p.getPeso() < menorPesoNoAsignado) {
+            backtracking(i + 1, paquetes, camiones, pesoNoAsignadoActual + p.getPeso());
+        }
     }
 
     private void guardarSolucion(List<Camion> camiones) {
